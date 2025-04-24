@@ -57,7 +57,8 @@ for(let i = 0; i < bgBtns.length; i++) {
   }
 }
 
-/* CHANGE THIS SO THAT BUTTONS trIGGER IT */
+
+/* Manually entered fields */
 
 colorPick.onchange = function(e) {
   getActiveTab().then((tabs) => {
