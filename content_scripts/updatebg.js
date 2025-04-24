@@ -17,11 +17,13 @@ function updateBg(request, sender, sendResponse) {
     var styleSheet = document.createElement("style")
     styleSheet.className = "rayStyleSheet"
 
-    textColour = "#f2f2f2;"
+    textColour = "#f2f2f2"
+    pageColour = "#989898"
+
     blueAccent = "#5757ff"
     blueAccent2 = "#8080ff"
     redAccent = "#ee6464"
-    pageColour = "#989898"
+    
 
     // Your CSS as text
     var styles = `
@@ -93,11 +95,11 @@ function updateBg(request, sender, sendResponse) {
 
         /* title textbox highlight */
         .docs-grille-gm3 .docs-title-input:hover {
-          border-color: white;
+          border-color: ${textColour};
         }
 
         .docs-grille-gm3 .docs-title-input:focus {
-          color: white;
+          color: ${textColour};
         }
 
 
@@ -199,23 +201,6 @@ function updateBg(request, sender, sendResponse) {
     styleSheet.textContent = styles
     document.head.appendChild(styleSheet)
 
-
-    // //menu text set as white for now
-    // menuTexter("white");
-    // titleText.style.color = "white";
-    // titleHighlight.style.color = request.colour;
-    
-    // pageBG.style.backgroundColor = request.colour;
-    // //toolbarBG.style.backgroundColor = request.colour;
-    // menuBG.style.backgroundColor = request.colour;
-    // titleBG.style.backgroundColor = request.colour;
-
-    // docsLogo.style.backgroundColor = request.colour;
-    
-
-    //get all pages then change the fill of each one (issue with this one)
-    
-
     //remove the new stylesheet
   } else if (request.reset){
 
@@ -225,8 +210,6 @@ function updateBg(request, sender, sendResponse) {
     }
     
   }
-
-  //================== helper functions to loop through stuff //==================
 
 
 }

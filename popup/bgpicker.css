@@ -7,20 +7,27 @@
 html {
     font-family: sans-serif;
     font-size: 10px;
-    background: rgb(150,150,150);
-    height: 88px;
+    background: rgb(200, 200, 200);
     margin: 0;
 }
 
 body {
-    width: 208px;
+    width: 210px;
     margin: 0 auto;
-    height: inherit;
+    height: 400px;
+}
+
+button {
+    color: white;
+}
+
+#reset {
+    color: black;
 }
 
 .bg-container button {
     display: inline-block;
-    width: 50px;
+    width: 60px;
     height: 30px;
     margin: 1px;
 }

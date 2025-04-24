@@ -11,8 +11,7 @@
   
     "permissions": [
         "tabs",
-        "cookies",
-        "<all_urls>"
+        "cookies"
     ],
   
     "web_accessible_resources": [
