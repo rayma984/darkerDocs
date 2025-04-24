@@ -91,6 +91,16 @@ function updateBg(request, sender, sendResponse) {
           background-color: ${request.colour};
         }
 
+        /* title textbox highlight */
+        .docs-grille-gm3 .docs-title-input:hover {
+          border-color: white;
+        }
+
+        .docs-grille-gm3 .docs-title-input:focus {
+          color: white;
+        }
+
+
         #docs-titlebar-container, #docs-header-container {
           background-color: ${request.colour};
         }
@@ -98,6 +108,7 @@ function updateBg(request, sender, sendResponse) {
         /* title highlight */
         .docs-grille-gm3 .docs-title-input {
             color: ${request.colour};
+            z-index: 0;
         }
 
         #docs-title-input-label-inner {
@@ -166,6 +177,12 @@ function updateBg(request, sender, sendResponse) {
         #docs-branding-container {
           background-color: ${request.colour};
           z-index: 50;
+        }
+
+        /* file, edit, etc will be sent behind the title */
+        .docs-grille-gm3 .docs-material #docs-menubar,
+        .docs-grille-gm3 .docs-material #docs-titlebar-container {
+          z-index: 10;
         }
 
         /* rest of the tool bar */
