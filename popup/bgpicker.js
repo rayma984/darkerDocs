@@ -1,7 +1,9 @@
 /* initialise variables */
 
-let bgBtns = document.querySelectorAll('.bg-container button');
+let bgBtns = document.querySelectorAll('.preset-container button');
+
 let colorPick = document.querySelector('input');
+
 let reset = document.querySelector('.color-reset button');
 let cookieVal = { colour : '' };
 
@@ -55,7 +57,7 @@ for(let i = 0; i < bgBtns.length; i++) {
   }
 }
 
-/* apply chosen color to HTML background */
+/* CHANGE THIS SO THAT BUTTONS trIGGER IT */
 
 colorPick.onchange = function(e) {
   getActiveTab().then((tabs) => {
