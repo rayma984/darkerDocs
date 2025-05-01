@@ -4,9 +4,10 @@ browser.runtime.onMessage.addListener(updateBg);
 function updateBg(request, sender, sendResponse) {
 
   console.log("colour update!")
+  console.log(sender)
 
 
-  if (request.colour) {
+  if (request.bgColour) {
 
     //reset previous style sheet
     let newStyle = document.getElementsByClassName("rayStyleSheet")[0]
@@ -17,8 +18,9 @@ function updateBg(request, sender, sendResponse) {
     var styleSheet = document.createElement("style")
     styleSheet.className = "rayStyleSheet"
 
-    textColour = "#f2f2f2"
-    pageColour = "#989898"
+    textColour = request.txtColour;
+    pageColour = request.pgColour;
+    bgColour = request.bgColour;
 
     blueAccent = "#5757ff"
     blueAccent2 = "#8080ff"
@@ -41,7 +43,7 @@ function updateBg(request, sender, sendResponse) {
            - tabs bg
         */
         .navigation-widget-floating-navigation-button.navigation-widget.navigation-widget-chaptered {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         .outline-refresh.navigation-widget-unified-styling .navigation-widget-empty-content {
@@ -86,11 +88,11 @@ function updateBg(request, sender, sendResponse) {
 
         /* BG behind the page */
         .kix-appview-editor {
-          background-color: ${request.colour} !important;
+          background-color: ${bgColour} !important;
         }
 
         #docs-bars {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* title textbox highlight */
@@ -104,12 +106,12 @@ function updateBg(request, sender, sendResponse) {
 
 
         #docs-titlebar-container, #docs-header-container {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* title highlight */
         .docs-grille-gm3 .docs-title-input {
-            color: ${request.colour};
+            color: ${bgColour};
             z-index: 0;
         }
 
@@ -123,46 +125,46 @@ function updateBg(request, sender, sendResponse) {
 
         /* between toolbar and horizontal ruler */
         #docs-chrome:not(.docs-hub-chrome) {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* for the stubborn top right */
         #docs-header:not(.docs-hub-appbar) .docs-titlebar-buttons {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* main vertical ruler */
         .docs-vertical-ruler .docs-ruler-face {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* vertical ruler (not main ruler) */
         .docs-vertical-ruler {
-          background-color: ${request.colour} !important;
+          background-color: ${bgColour} !important;
         }
 
         /* vertical border */
         #kix-vertical-ruler {
-          border-color: ${request.colour};
+          border-color: ${bgColour};
         }
 
         /* horizontal ruler (outside outside) */
         #kix-horizontal-ruler-container {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* horizontal ruler (outside) */
         .docs-horizontal-ruler {
-          background-color: ${request.colour} !important;
+          background-color: ${bgColour} !important;
         }
 
         /* horizontal ruler (inside) */
         .docs-horizontal-ruler .docs-ruler-face {
-          background-color: ${request.colour} !important;
+          background-color: ${bgColour} !important;
         }
         
         .docs-horizontal-ruler {
-          border-bottom-color: ${request.colour};
+          border-bottom-color: ${bgColour};
         }
         
         /* ruler number markings */
@@ -172,18 +174,18 @@ function updateBg(request, sender, sendResponse) {
 
         /* ruler edge margins */
         .docs-ruler-background {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
         }
 
         /* right side menu */
         .docs-grille-gm3 .companion-app-switcher-container,
         .docs-grille-gm3 .docs-companion-app-switcher-container {
-          background: ${request.colour};
+          background: ${bgColour};
         }
 
         /* space behind the docs logo */
         #docs-branding-container {
-          background-color: ${request.colour};
+          background-color: ${bgColour};
           z-index: 50;
         }
 
@@ -213,6 +215,9 @@ function updateBg(request, sender, sendResponse) {
     let newStyle = document.getElementsByClassName("rayStyleSheet")[0]
     if (newStyle != null){
       newStyle.remove()
+    }
+    else {
+      console.log("nothing to change :)")
     }
     
   }

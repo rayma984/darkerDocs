@@ -5,7 +5,7 @@ let bgBtns = document.querySelectorAll('.preset-container button');
 let colorPick = document.querySelector('input');
 
 let reset = document.querySelector('.color-reset button');
-let cookieVal = { colour : '' };
+let cookieVal = { };
 
 function getActiveTab() {
   return browser.tabs.query({active: true, currentWindow: true});
@@ -23,30 +23,41 @@ for(let i = 0; i < bgBtns.length; i++) {
     getActiveTab().then((tabs) => {
       let imgName = e.target.getAttribute('class');
 
-      let colourChoice;
+      let bgColour;
+      let pageColour;
+      let textColour = '#f2f2f2';
 
       switch(imgName){
         case 'grey':
-          colourChoice = '#666666';
+          bgColour = '#666666';
+          pageColour = '#b0b0b0';
         break;
 
         case 'slate':
-          colourChoice = '#262626';
+          bgColour = '#262626';
+          pageColour = '#b1b1b1';
         break;
 
         case 'jet':
-          colourChoice = '#000000';
+          bgColour = '#000000';
+          pageColour = '#8c8c8c';
         break;
 
         default:
-          colourChoice = '#000000'; //defaults to jet
-
+          //defaults to jet
+          bgColour = '#000000'; 
+          pageColour = '#8c8c8c';
       }
 
+      package = {
+        bgColour: bgColour,
+        pgColour: pageColour,
+        txtColour: textColour
+      }
 
-      browser.tabs.sendMessage(tabs[0].id, {colour: colourChoice});
+      browser.tabs.sendMessage(tabs[0].id, package);
 
-      cookieVal.colour = colourChoice;
+      cookieVal.colour = bgColour;
 
       browser.cookies.set({
         url: tabs[0].url,
@@ -80,7 +91,7 @@ reset.onclick = function() {
   getActiveTab().then((tabs) => {
     browser.tabs.sendMessage(tabs[0].id, {reset: true});
 
-    cookieVal = { colour : '' };
+    cookieVal = {};
     browser.cookies.remove({
       url: tabs[0].url,
       name: "DarkerDocs" 
