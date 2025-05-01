@@ -175,6 +175,12 @@ function updateBg(request, sender, sendResponse) {
           background-color: ${request.colour};
         }
 
+        /* right side menu */
+        .docs-grille-gm3 .companion-app-switcher-container,
+        .docs-grille-gm3 .docs-companion-app-switcher-container {
+          background: ${request.colour};
+        }
+
         /* space behind the docs logo */
         #docs-branding-container {
           background-color: ${request.colour};
