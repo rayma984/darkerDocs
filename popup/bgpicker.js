@@ -1,69 +1,58 @@
-/* initialise variables */
 
-let bgBtns = document.querySelectorAll('.preset-container button');
-let reset = document.querySelector('.color-reset button');
+// reset button
+const reset = document.querySelector('.color-reset button');
+
+// manually entered fields
 const form_bgColour = document.getElementById("bgColour")
 const form_textColour = document.getElementById("textColour")
 const form_pageColour = document.getElementById("pageColour")
+
+//presets
+const grey_preset = document.getElementById("grey")
+const slate_preset = document.getElementById("slate")
+const jet_preset = document.getElementById("jet")
 
 function getActiveTab() {
   return browser.tabs.query({active: true, currentWindow: true});
 }
 
-/* apply backgrounds to buttons */
-/* add listener so that when clicked, button applies background to page HTML */
 
-for(let i = 0; i < bgBtns.length; i++) {
-  let colourPreset = bgBtns[i].getAttribute('class');
-  let bgImg = 'url(\'images/' + colourPreset + '.png\')';
-  bgBtns[i].style.backgroundImage = bgImg;
-
-  bgBtns[i].onclick = function(e) {
-    let imgName = e.target.getAttribute('class');
-
-    let bgColour;
-    let pageColour;
-    let textColour = '#f2f2f2';
-
-    switch(imgName){
-      case 'grey':
-        bgColour = '#666666';
-        pageColour = '#b0b0b0';
-      break;
-
-      case 'slate':
-        bgColour = '#262626';
-        pageColour = '#b1b1b1';
-      break;
-
-      case 'jet':
-        bgColour = '#000000';
-        pageColour = '#8c8c8c';
-      break;
-
-      default:
-        //defaults to jet
-        bgColour = '#000000'; 
-        pageColour = '#8c8c8c';
-    }
-
-    colours = {
-      bgColour: bgColour,
-      pgColour: pageColour,
-      txtColour: textColour
-    }
-    
-    sendCookie(colours);
+// listeners for preset buttons
+grey_preset.onclick = () => {
+  colours = {
+    txtColour: '#f2f2f2',
+    bgColour: '#666666',
+    pgColour: '#b0b0b0'
   }
+
+  sendCookie(colours);
+}
+
+slate_preset.onclick = () => {
+  colours = {
+    txtColour: '#f2f2f2',
+    bgColour: '#262626',
+    pgColour: '#b1b1b1'
+  }
+
+  sendCookie(colours);
+}
+
+jet_preset.onclick = () => {
+  colours = {
+    txtColour: '#f2f2f2',
+    bgColour: '#000000',
+    pgColour: '#8c8c8c'
+  }
+
+  sendCookie(colours);
 }
 
 
 /* Manually entered fields */
-
 document.getElementById("submit_manual").addEventListener("click", () => {
 
   // Grab the input values
-  // Store them in variables
   let colours = {
     bgColour: form_bgColour.value.trim() || null,
     pgColour: form_pageColour.value.trim() || null,

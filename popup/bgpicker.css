@@ -29,6 +29,18 @@ body {
     color: white;
 }
 
+.preset-container #grey {
+    background-image: url("images/grey.png");
+}
+
+.preset-container #slate {
+    background-image: url("images/slate.png");
+}
+
+.preset-container #jet {
+    background-image: url("images/jet.png");
+}
+
 .color-reset button {
     display: block;
     width: 70%;
