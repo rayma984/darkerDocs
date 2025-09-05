@@ -22,33 +22,48 @@ function updateBg(request, sender, sendResponse) {
     blueAccent = "#5757ff"
     blueAccent2 = "#8080ff"
     redAccent = "#ee6464"
-    
 
-    // Your CSS as text
-    var styles = `
+    var master_styles = "";
 
-        /* actual pages */
+    //if page colour is specified, set it
+    if (pageColour){
+
+      /* 
+        page colour
+        add more tabs
+        comment box
+
+        also accents
+      */
+
+      let page_style = `
+      
         rect {
           fill: ${pageColour};
         }
 
-        /* 
-          chapter nav 
-           - background
-           - text
-           - tabs name (when not hovered over)
-           - tabs bg
-        */
-        .navigation-widget-floating-navigation-button.navigation-widget.navigation-widget-chaptered {
-          background-color: ${bgColour};
+        .outlines-widget-chaptered .kix-outlines-widget-header-contents {
+          background-color: ${pageColour};
         }
 
-        .outline-refresh.navigation-widget-unified-styling .navigation-widget-empty-content {
-          color: ${textColour};
+        .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active,
+        .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
+        .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active .docos-anchoreddocoview-internal,
+        .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active.docos-anchoreddocoview:hover .docos-anchoreddocoview-internal,
+        .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoreddocoview-input-pane,
+        .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoredreplyview,
+        .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoreddocoview-input-pane,
+        .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoredreplyview{
+          background-color: ${pageColour};
         }
 
-        .chapter-item .goog-control, .chapter-label-content:not(:hover){
-          color: ${textColour};
+        .docs-grille-gm3 .docos-anchoreddocoview .docos-docoview-rootreply :only-child.docos-anchoredreplyview{
+          background-color: ${pageColour};
+        }
+
+        /* adding tabs text */
+        .outlines-widget-chaptered .navigation-widget-header {
+          color: black;
         }
 
         /* background colour of the tab in focus */
@@ -72,24 +87,33 @@ function updateBg(request, sender, sendResponse) {
         .navigation-widget-content:not(.chapter-item-dragged-within) .chapter-item-label-and-buttons-container-selected:hover:not(:focus-within) {
           background: ${blueAccent2};
         }
+      `
 
-        /* adding tabs */
-        .outlines-widget-chaptered .kix-outlines-widget-header-contents {
-          background-color: ${pageColour};
+      master_styles += page_style
+    }
+    
+    //if text colour is specified, set it
+    if (textColour){
+
+      /* 
+        Toolbar text
+        title textbox border
+        ruler markings
+
+      */
+
+      let text_style = `
+
+        .outline-refresh.navigation-widget-unified-styling .navigation-widget-empty-content {
+          color: ${textColour};
         }
 
-        /* adding tabs text */
-        .outlines-widget-chaptered .navigation-widget-header {
-          color: black;
+        .chapter-item .goog-control, .chapter-label-content:not(:hover){
+          color: ${textColour};
         }
 
-        /* BG behind the page */
-        .kix-appview-editor {
-          background-color: ${bgColour} !important;
-        }
-
-        #docs-bars {
-          background-color: ${bgColour};
+        .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-0{
+          color: ${textColour};
         }
 
         /* title textbox highlight */
@@ -101,6 +125,54 @@ function updateBg(request, sender, sendResponse) {
           color: ${textColour};
         }
 
+        #docs-title-input-label-inner {
+          color: ${textColour};
+        }
+
+        .docs-grille-gm3 .docs-menubar .goog-control {
+          color: ${textColour};
+        }
+
+        .docs-grille-gm3 .docs-menubar .goog-control-hover {
+          color: black;
+        }
+
+        /* ruler number markings */
+        .docs-ruler-face-number {
+          color: ${textColour};
+        }
+
+      `
+      
+      master_styles += text_style
+    }
+
+    //if background colour is specified, set it
+    if (bgColour){
+
+      /* 
+        navigation bar
+        behind the page
+        behind the toolbar/header
+        rulers
+        right side menu (that no one uses)
+      */
+
+      let bg_style = `
+
+        /* background of navigation labels */
+        .navigation-widget-floating-navigation-button.navigation-widget.navigation-widget-chaptered {
+          background-color: ${bgColour};
+        }
+
+        /* BG behind the page */
+        .kix-appview-editor {
+          background-color: ${bgColour} !important;
+        }
+
+        #docs-bars {
+          background-color: ${bgColour};
+        }
 
         #docs-titlebar-container, #docs-header-container {
           background-color: ${bgColour};
@@ -110,14 +182,6 @@ function updateBg(request, sender, sendResponse) {
         .docs-grille-gm3 .docs-title-input {
             color: ${bgColour};
             z-index: 0;
-        }
-
-        #docs-title-input-label-inner {
-          color: ${textColour};
-        }
-
-        .docs-grille-gm3 .docs-menubar .goog-control {
-          color: ${textColour};
         }
 
         /* between toolbar and horizontal ruler */
@@ -163,11 +227,6 @@ function updateBg(request, sender, sendResponse) {
         .docs-horizontal-ruler {
           border-bottom-color: ${bgColour};
         }
-        
-        /* ruler number markings */
-        .docs-ruler-face-number {
-          color: ${textColour};
-        }
 
         /* ruler edge margins */
         .docs-ruler-background {
@@ -185,7 +244,16 @@ function updateBg(request, sender, sendResponse) {
           background-color: ${bgColour};
           z-index: 50;
         }
+      
+      `
 
+      master_styles += bg_style
+
+    }
+    
+    //this is header formatting stuff
+    master_styles += 
+      `
         /* file, edit, etc will be sent behind the title */
         .docs-grille-gm3 .docs-material #docs-menubar,
         .docs-grille-gm3 .docs-material #docs-titlebar-container {
@@ -201,27 +269,9 @@ function updateBg(request, sender, sendResponse) {
         .docs-titlebar-badges {
           z-index: 1
         }
+      `
 
-        /* adding comments */
-        .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active,
-        .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
-        .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active .docos-anchoreddocoview-internal,
-        .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active.docos-anchoreddocoview:hover .docos-anchoreddocoview-internal,
-        .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoreddocoview-input-pane,
-        .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoredreplyview,
-        .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoreddocoview-input-pane,
-        .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoredreplyview{
-          background-color: ${pageColour};
-        }
-
-        /* comment box */
-        .docs-grille-gm3 .docos-anchoreddocoview .docos-docoview-rootreply :only-child.docos-anchoredreplyview{
-          background-color: ${pageColour};
-          color: ${textColour};
-        }
-    `;
-
-    styleSheet.textContent = styles
+    styleSheet.textContent = master_styles
     document.head.appendChild(styleSheet)
 
     //remove the new stylesheet
