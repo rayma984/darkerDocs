@@ -2,10 +2,7 @@
 
 let bgBtns = document.querySelectorAll('.preset-container button');
 
-let colorPick = document.querySelector('input');
-
 let reset = document.querySelector('.color-reset button');
-let cookieVal = { };
 
 function getActiveTab() {
   return browser.tabs.query({active: true, currentWindow: true});
@@ -49,21 +46,23 @@ for(let i = 0; i < bgBtns.length; i++) {
           pageColour = '#8c8c8c';
       }
 
-      package = {
+      colours = {
         bgColour: bgColour,
         pgColour: pageColour,
         txtColour: textColour
       }
 
-      browser.tabs.sendMessage(tabs[0].id, package);
+      browser.tabs.sendMessage(tabs[0].id, colours);
 
-      cookieVal.colour = bgColour;
-
+      //set the cookie
       browser.cookies.set({
         url: tabs[0].url,
         name: "DarkerDocs", 
-        value: JSON.stringify(cookieVal)
+        value: JSON.stringify(colours)
       })
+      
+      //sendCookie(colours);
+
     });
   }
 }
@@ -71,19 +70,33 @@ for(let i = 0; i < bgBtns.length; i++) {
 
 /* Manually entered fields */
 
-colorPick.onchange = function(e) {
-  getActiveTab().then((tabs) => {
-    let currColor = e.target.value;
-    browser.tabs.sendMessage(tabs[0].id, {colour: currColor});
+document.addEventListener("DOMContentLoaded", () => {
+  // Attach click event to the submit button
+  document.getElementById("submit_manual").addEventListener("click", () => {
+    // Grab the input values
+    const bgColour = document.getElementById("bgColour").value.trim();
+    const textColour = document.getElementById("textColour").value.trim();
+    const pageColour = document.getElementById("pageColour").value.trim();
 
-    cookieVal.colour = currColor;
+    // Store them in variables
+    let colours = {
+      bgColour: bgColour || null,
+      pgColour: pageColour || null,
+      txtColour: textColour || null
+    };
+
+    tab = getActiveTab()
+
+    browser.tabs.sendMessage(tab.id, colours);
+    //set the cookie
     browser.cookies.set({
-      url: tabs[0].url,
+      url: tab.url,
       name: "DarkerDocs", 
-      value: JSON.stringify(cookieVal)
+      value: JSON.stringify(colours)
     })
+
   });
-}
+});
 
 /* reset background */
 
@@ -91,7 +104,6 @@ reset.onclick = function() {
   getActiveTab().then((tabs) => {
     browser.tabs.sendMessage(tabs[0].id, {reset: true});
 
-    cookieVal = {};
     browser.cookies.remove({
       url: tabs[0].url,
       name: "DarkerDocs" 
@@ -99,11 +111,16 @@ reset.onclick = function() {
   });
 }
 
-/* Report cookie changes to the console */
 
-browser.cookies.onChanged.addListener((changeInfo) => {
-  console.log(`Cookie changed:\n
-              * Cookie: ${JSON.stringify(changeInfo.cookie)}\n
-              * Cause: ${changeInfo.cause}\n
-              * Removed: ${changeInfo.removed}`);
-});
+function sendCookie(package){
+
+  //send message to change appearance immediately
+  browser.tabs.sendMessage(tabs[0].id, package);
+
+  //set the cookie
+  browser.cookies.set({
+    url: tabs[0].url,
+    name: "DarkerDocs", 
+    value: JSON.stringify(package)
+  })
+}

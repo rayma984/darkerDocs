@@ -11,7 +11,8 @@
   
     "permissions": [
         "tabs",
-        "cookies"
+        "cookies",
+        "https://docs.google.com/*"
     ],
   
     "web_accessible_resources": [
