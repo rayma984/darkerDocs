@@ -113,6 +113,7 @@ function updateBg(request, sender, sendResponse) {
         title textbox border
         comment text
         ruler markings
+        progress saved text
       */
 
       let text_style = `
@@ -155,6 +156,10 @@ function updateBg(request, sender, sendResponse) {
           color: ${textColour};
         }
 
+        /* progress saved text */
+        .docs-gm .docs-save-indicator-caption{
+          color: ${textColour};
+        }
       `
       
       master_styles += text_style
