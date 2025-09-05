@@ -62,7 +62,6 @@ document.getElementById("submit_manual").addEventListener("click", () => {
   };
 
   sendCookie(colours);
-  resetInputs();
 });
 
 

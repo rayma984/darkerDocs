@@ -37,7 +37,8 @@ function updateBg(request, sender, sendResponse) {
       */
 
       let page_style = `
-      
+
+        /* page colour */
         rect {
           fill: ${pageColour};
         }
@@ -46,6 +47,7 @@ function updateBg(request, sender, sendResponse) {
           background-color: ${pageColour};
         }
 
+        /* comments */
         .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active,
         .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
         .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active .docos-anchoreddocoview-internal,
@@ -54,6 +56,17 @@ function updateBg(request, sender, sendResponse) {
         .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoredreplyview,
         .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoreddocoview-input-pane,
         .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoredreplyview{
+          background-color: ${pageColour};
+        }
+
+        /* comment text */
+        .docs-grille-gm3 .docos-anchoredreplyview .docos-anchoredreplyview-body{
+          color: black;
+        }
+
+        /* reply comments? */
+        .docos-anchoreddocoview .docos-anchoreddocoview-content > .docos-anchoredreplyview:last-of-type,
+        .docos-anchoreddocoview .docos-docoview-rootreply:only-child .docos-anchoredreplyview{
           background-color: ${pageColour};
         }
 
@@ -98,8 +111,8 @@ function updateBg(request, sender, sendResponse) {
       /* 
         Toolbar text
         title textbox border
+        comment text
         ruler markings
-
       */
 
       let text_style = `
