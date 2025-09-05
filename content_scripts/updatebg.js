@@ -204,6 +204,24 @@ function updateBg(request, sender, sendResponse) {
         .docs-titlebar-badges {
           z-index: 1
         }
+
+        /* adding comments */
+        .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active,
+        .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
+        .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active .docos-anchoreddocoview-internal,
+        .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active.docos-anchoreddocoview:hover .docos-anchoreddocoview-internal,
+        .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoreddocoview-input-pane,
+        .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoredreplyview,
+        .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoreddocoview-input-pane,
+        .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoredreplyview{
+          background-color: ${pageColour};
+        }
+
+        /* comment box */
+        .docs-grille-gm3 .docos-anchoreddocoview .docos-docoview-rootreply :only-child.docos-anchoredreplyview{
+          background-color: ${pageColour};
+          color: ${textColour};
+        }
     `;
 
     styleSheet.textContent = styles
