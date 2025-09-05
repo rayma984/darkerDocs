@@ -36,6 +36,7 @@ slate_preset.onclick = () => {
   }
 
   sendCookie(colours);
+  resetInputs();
 }
 
 jet_preset.onclick = () => {
@@ -46,6 +47,7 @@ jet_preset.onclick = () => {
   }
 
   sendCookie(colours);
+  resetInputs();
 }
 
 
@@ -60,7 +62,7 @@ document.getElementById("submit_manual").addEventListener("click", () => {
   };
 
   sendCookie(colours);
-
+  resetInputs();
 });
 
 
@@ -76,14 +78,17 @@ reset.onclick = function() {
     })
   }); 
 
-  //reset form fields
+  resetInputs();
+}
+
+//reset form fields
+function resetInputs(){
   form_bgColour.value = "";
   form_textColour.value = "";
   form_pageColour.value = "";
-
 }
 
-
+// send cookie
 function sendCookie(package){
 
   getActiveTab().then((tabs) => {

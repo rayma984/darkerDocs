@@ -1,11 +1,10 @@
 browser.runtime.onMessage.addListener(updateBg);
 
 
-function updateBg(request, sender, sendResponse) {
+function updateBg(request, sender, sendResponse) {  
 
-  console.log("colour update!")
-
-  if (request.bgColour) {
+  if (request.bgColour || request.txtColour || request.pgColour){
+    console.log("colour update!")
 
     //reset previous style sheet
     let newStyle = document.getElementsByClassName("rayStyleSheet")[0]
