@@ -4,8 +4,6 @@ browser.runtime.onMessage.addListener(updateBg);
 function updateBg(request, sender, sendResponse) {
 
   console.log("colour update!")
-  console.log(sender)
-
 
   if (request.bgColour) {
 
