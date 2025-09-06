@@ -1,9 +1,7 @@
-/* Retrieve any previously set cookie and send to content script */
-
 function getActiveTab() {
   return browser.tabs.query({active: true, currentWindow: true});
 }
-  
+
 function cookieUpdate() {
   getActiveTab().then((tabs) => {
     // get any previously set cookie for the current tab 
@@ -11,11 +9,17 @@ function cookieUpdate() {
       url: tabs[0].url,
       name: "DarkerDocs"
     });
-
     gettingCookies.then((cookie) => {
       if (cookie) {
         let cookieVal = JSON.parse(cookie.value);
-        browser.tabs.sendMessage(tabs[0].id, {colour: cookieVal.color});
+        
+        let package = {
+          bgColour: cookieVal.bgColour || null,
+          pgColour: cookieVal.pgColour || null,
+          txtColour: cookieVal.txtColour || null
+        }
+
+        browser.tabs.sendMessage(tabs[0].id, package);
       }
     });
   }); 

@@ -1,6 +1,6 @@
 browser.runtime.onMessage.addListener(updateBg);
 
-
+// function that updates the page styling
 function updateBg(request, sender, sendResponse) {  
 
   if (request.bgColour || request.txtColour || request.pgColour){
