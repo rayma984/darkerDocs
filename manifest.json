@@ -4,7 +4,7 @@
     "name": "Darker Google Docs",
     "version": "1.0",
   
-    "description": "Change the background colour of the Google Docs page.",
+    "description": "Changes the theme of Google Docs into darker palettes. With 3 darker presets and the ability to manually specify colour themes, you can customize how your Google Docs UI.",
     "icons": {
       "48": "icons/bgpicker-48.png"
     },
